@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import './App.css'
 import hookActions from './actions/hookActions'
 import Input from './Input'
@@ -20,7 +20,7 @@ function reducer(state, action) {
 
 const App = () => {
 
-  const [state, dispatch] = useReducer(reducer, {secretWord: null})
+  const [state, dispatch] = React.useReducer(reducer, {secretWord: null})
 
   const setSecretWord = (secretWord) => dispatch({type: 'setSecretWord', payload: secretWord})
 
