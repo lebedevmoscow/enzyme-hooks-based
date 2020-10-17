@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react'
 import './App.css'
 import hookActions from './actions/hookActions'
+import Input from './Input'
 
 /**
  * Reducer to update state
@@ -24,11 +25,25 @@ const App = () => {
   const setSecretWord = (secretWord) => dispatch({type: 'setSecretWord', payload: secretWord})
 
   React.useEffect(() => {
-    hookActions.getSecretWord()
+    hookActions.getSecretWord(setSecretWord)
+    setSecretWord('party')
   }, [])
 
+  if (!state.secretWord) {
+    return (
+      <div className="container" data-test="spinner">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+        <p>Loading secret word...</p>
+      </div>
+    )
+  }
+
   return (
-    <div data-test="component-app">
+    <div className="container" data-test="component-app">
+      <h1>Jotto</h1>
+      <Input secretWord={state.secretWord}/>
     </div>
   )
 }
