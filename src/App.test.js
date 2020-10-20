@@ -16,7 +16,7 @@ const setup = (secretWord = 'party') => {
   mockGetSecretWord.mockClear()
   hookActions.getSecretWord = mockGetSecretWord
 
-  const mockUseReducer = jest.fn().mockReturnValue([{secretWord}, jest.fn()])
+  const mockUseReducer = jest.fn().mockReturnValue([{secretWord, language: 'en'}, jest.fn()])
 
   React.useReducer = mockUseReducer
   
@@ -75,7 +75,6 @@ describe("secretWord is null", () => {
 
   test("does not render app when secretWord is null", () => {
     const appComponent = findByTestAttr(wrapper, "component-app");
-    console.log(appComponent.debug())
     expect(appComponent.exists()).toBe(false);
   });
   test("renders spinner when secretWord is null", () => {
